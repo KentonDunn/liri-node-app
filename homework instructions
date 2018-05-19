@@ -1,0 +1,24 @@
+use npm install with the four APIs
+
+devDependencies are used while you're building .  Mocha is specifically used for development
+
+git init creates a git repository
+
+make sure your package.JSON reflects all of the packages you'll need.
+
+Twitter will be a dependency. ("@urban_coder")
+
+https://www.npmjs.com/package/twitter
+
+https://www.npmjs.com/package/spotify-web-api-node
+
+https://www.npmjs.com/package/dotenv
+
+process.env is a file that you can use to pass in credentials. 
+
+switch () 
+case 
+// code block
+break
+
+43ZHCT0cAZBISjO8DG9PnE
