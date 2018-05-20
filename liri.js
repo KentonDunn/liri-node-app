@@ -76,16 +76,23 @@ if (inputString == "my-tweets") {
 
 
 } else if (inputString == "movie-this") {
-  console.log("Is it better than the Matrix?");
+
+  var movieTitle = process.argv.slice(3).join(" ");
+  url = "http://www.omdbapi.com/?t=" + movieTitle + "&y=&plot=short&apikey=trilogy";
+
+  console.log("Is it better than The Matrix?");
   // Then run a request to the OMDB API with the movie specified
   request(
-    "http://www.omdbapi.com/?t=remember+the+titans&y=&plot=short&apikey=trilogy",
+    url,
     function (error, response, body) {
       // If the request is successful (i.e. if the response status code is 200)
       if (!error && response.statusCode === 200) {
-        // Parse the body of the site and recover just the imdbRating
-        // (Note: The syntax below for parsing isn't obvious. Just spend a few moments dissecting it).
-        console.log("The movie's rating is: " + JSON.parse(body).imdbRating);
+
+        var result = JSON.parse(body);
+
+        const rtRating = result.Ratings[1];
+
+        console.log("Title: " + result.Title + "\n" + "Year Released: " + result.Year + "\n" + "IMDB Rating: " + result.imdbRating + "\n" + "Rotten Tomatoes Rating: " + Object.entries(rtRating)[1].splice(1) + "\n" + "Country: " + result.Country + "\n" + "Language(s): " + result.Language + "\n" + "Plot: " + result.Plot + "\n" + "Actors: " + result.Actors);
       }
     }
   );
