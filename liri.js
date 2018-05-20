@@ -32,6 +32,23 @@ var fs = require("fs");
 //-------------------------------------------------------
 if (inputString == "my-tweets") {
   console.log("Stay off Twitter!");
+  client.get('search/tweets', {
+    q: 'urban_coder',
+
+  }, function (error, tweets, response) {
+    for (i = 0; i < tweets.statuses.length; i++) {
+      if (i === 21) {
+        break;
+
+      }
+      // log the actual tweet
+      console.log(tweets.statuses[i].text);
+      // logs when the tweet was created
+      console.log(tweets.statuses[i].created_at);
+
+    }
+
+  });
 } else if (inputString == "spotify-this-song") {
 
   var songTitle = process.argv.slice(3).join(" ");
@@ -57,68 +74,6 @@ if (inputString == "my-tweets") {
   });
 
 
-  /* Retrieve an access token and a refresh token
-  spotify.clientCredentialsGrant().then(
-    function (data) {
-      console.log("The access token expires in " + data.body["expires_in"]);
-      console.log("The access token is " + data.body["access_token"]);
-
-      // Save the access token so that it's used in future calls
-      spotify.setAccessToken(data.body["access_token"]);
-
-      //This code gets Elvis information.
-      spotify
-        .getArtistAlbums("43ZHCT0cAZBISjO8DG9PnE", {
-          limit: 1
-        })
-        .then(function (data) {
-          return data.body.items.map(function (a) {
-            return a.id;
-          });
-        })
-        .then(function (albums) {
-          return spotify.getAlbums(albums);
-        })
-        .then(function (data) {
-          console.log(data.body);
-        });
-      //end of spotify.getArtistAlbums Search for Elvis information
-      //-----------------------------------------------------------
-
-      spotify.searchTracks('Love', function (err, data) {
-        if (err) {
-          console.error("Something went wrong", err.message);
-          return;
-        }
-
-        // Print some information about the results
-        console.log("I got " + data.body.tracks.total + " results!");
-
-        // Go through the first page of results
-        var firstPage = data.body.tracks.items;
-        console.log(
-          "The tracks in the first page are.. (popularity in parentheses)"
-        );
-
-        /*
-         * 0: All of Me (97)
-         * 1: My Love (91)
-         * 2: I Love This Life (78)
-         * ...
-         
-        firstPage.forEach(function (track, index) {
-          console.log(index + ": " + track.name + " (" + track.popularity + ")");
-        });
-
-
-      });
-
-    },
-    function (err) {
-      console.log("Something went wrong when retrieving an access token", err);
-    }
-  );
-*/
 
 } else if (inputString == "movie-this") {
   console.log("Is it better than the Matrix?");
