@@ -26,11 +26,9 @@ var inputString = process.argv[2];
 var fs = require("fs");
 
 
-
-
-//COMMANDS FOR LIRI BOT
-//-------------------------------------------------------
-if (inputString == "my-tweets") {
+//Functions for LIRI BOT
+//-------------------------------------------------------------
+function myTweets() {
   console.log("Stay off Twitter!");
   client.get('search/tweets', {
     q: 'urban_coder',
@@ -49,8 +47,9 @@ if (inputString == "my-tweets") {
     }
 
   });
-} else if (inputString == "spotify-this-song") {
+}
 
+function spotifyThis() {
   var songTitle = process.argv.slice(3).join(" ");
 
   spotify.search({
@@ -73,10 +72,9 @@ if (inputString == "my-tweets") {
 
   });
 
+}
 
-
-} else if (inputString == "movie-this") {
-
+function movieCheck() {
   var movieTitle = process.argv.slice(3).join(" ");
   url = "http://www.omdbapi.com/?t=" + movieTitle + "&y=&plot=short&apikey=trilogy";
 
@@ -96,7 +94,11 @@ if (inputString == "my-tweets") {
       }
     }
   );
-} else if (inputString == "do-what-it-says") {
+
+}
+
+function doeetNow() {
+
   console.log("OK, OK, I'll do what it says!");
   // This block of code will read from the "random.txt" file.
   // It's important to include the "utf8" parameter or the code will provide stream data (garbage)
@@ -117,9 +119,28 @@ if (inputString == "my-tweets") {
     console.log(dataArr);
 
     //what I want to do is take the [0] and [1] information and have it run again in the command line.  trying to google how. 
+    var command1 = dataArr[0];
+    var command2 = dataArr[1];
 
-
+    console.log(command1);
+    spotifyThis(command1)
   });
+
+}
+
+//COMMANDS FOR LIRI BOT
+//-------------------------------------------------------
+if (inputString == "my-tweets") {
+  myTweets();
+} else if (inputString == "spotify-this-song") {
+  spotifyThis();
+
+} else if (inputString == "movie-this") {
+  movieCheck();
+
+} else if (inputString == "do-what-it-says") {
+  doeetNow();
+
 } else {
   console.log("Input Command Not Recognized");
 }
