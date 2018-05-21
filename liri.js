@@ -108,13 +108,17 @@ if (inputString == "my-tweets") {
     }
 
     // We will then print the contents of data
-    console.log(data);
+    //console.log(data);
 
     // Then split it by commas (to make it more readable)
     var dataArr = data.split(",");
 
     // We will then re-display the content as an array for later use.
     console.log(dataArr);
+
+    //what I want to do is take the [0] and [1] information and have it run again in the command line.  trying to google how. 
+
+
   });
 } else {
   console.log("Input Command Not Recognized");
